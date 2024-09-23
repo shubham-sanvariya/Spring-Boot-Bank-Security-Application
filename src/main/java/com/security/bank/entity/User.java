@@ -45,5 +45,8 @@ public class User {
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    private List<Account> accountList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
     private List<Investment> investmentList = new ArrayList<>();
 }
