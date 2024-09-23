@@ -1,4 +1,4 @@
-package com.security.bank.investments;
+package com.security.bank.entity;
 
 public enum InvestmentType {
     GOLD,

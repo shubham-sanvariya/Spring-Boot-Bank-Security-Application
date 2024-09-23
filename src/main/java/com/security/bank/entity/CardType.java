@@ -1,4 +1,4 @@
-package com.security.bank.cards;
+package com.security.bank.entity;
 
 public enum CardType {
     DEBIT_CLASSIC,

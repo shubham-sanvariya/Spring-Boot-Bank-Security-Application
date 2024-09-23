@@ -1,4 +1,4 @@
-package com.security.bank.accounts;
+package com.security.bank.entity;
 
 public enum AccountType {
     SAVINGS,
