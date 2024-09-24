@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.security.bank.dto.JwtRequest;
 import com.security.bank.dto.JwtResponse;
 import com.security.bank.dto.UserDto;
+import com.security.bank.entity.Role;
 import com.security.bank.entity.User;
 import com.security.bank.jwt.JwtAuthenticationHelper;
 import com.security.bank.repository.UserRepository;
@@ -41,6 +42,9 @@ public class AuthService {
                 .investmentList(userDto.getInvestmentList())
                 .build();
 
+        Role role = new Role();
+        role.setRoleName("ROLE_CUSTOMER");
+        user.setRole(role);
         userRepository.save(user);
     }
 }
