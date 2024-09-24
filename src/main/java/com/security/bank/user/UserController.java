@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.security.bank.dto.JwtRequest;
+import com.security.bank.dto.JwtResponse;
 import com.security.bank.dto.UserDto;
 import com.security.bank.service.AuthService;
 
@@ -18,5 +20,10 @@ public class UserController {
     @PostMapping("/register")
     public void registerUser(UserDto userDto){
         authService.registerUser(userDto);
+    }
+
+    @PostMapping("/login")
+    public JwtResponse login(JwtRequest jwtRequest){
+        return authService.login(jwtRequest);
     }
 }
