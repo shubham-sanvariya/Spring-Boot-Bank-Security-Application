@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.security.bank.entity.Account;
 import com.security.bank.entity.AccountType;
+import com.security.bank.entity.BranchType;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account,Long>{
@@ -22,4 +23,7 @@ public interface AccountRepository extends JpaRepository<Account,Long>{
 
     @Query("SELECT ac FROM Account ac WHERE ac.accountType = ?1")
     List<Account> findAllByAccountType(AccountType accountType);
+
+    @Query("SELECT ac FROM Account ac WHERE ac.branch = ?1")
+    List<Account> findAllByBranch(BranchType branchType);
 }
