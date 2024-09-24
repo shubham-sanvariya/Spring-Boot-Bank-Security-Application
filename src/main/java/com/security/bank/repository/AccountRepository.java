@@ -16,4 +16,6 @@ public interface AccountRepository extends JpaRepository<Account,Long>{
     @Query("SELECT ac FROM Account ac WHERE ac.status = 'ACTIVE' ")
     List<Account> findAllActiveAccounts();
 
+    @Query("SELECT ac FROM Account ac WHERE ac.status = 'INACTIVE' ")
+    List<Account> findAllInActiveAccounts();
 }
