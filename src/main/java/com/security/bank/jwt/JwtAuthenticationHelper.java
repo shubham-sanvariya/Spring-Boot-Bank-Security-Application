@@ -1,5 +1,7 @@
 package com.security.bank.jwt;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -19,5 +21,13 @@ public class JwtAuthenticationHelper {
 
     public String getUsernameFromToken(String token){
         return getClaimsFromToken(token).getSubject();
+    }
+
+    public boolean isTokenExpired(String token){
+        Claims claims = getClaimsFromToken(token);
+
+        Date expiredDate = claims.getExpiration();
+
+        return expiredDate.before(new Date());
     }
 }
