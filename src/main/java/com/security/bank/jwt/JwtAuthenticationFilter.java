@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -36,12 +39,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
                 username = jwtHelper.getUsernameFromToken(token);
 
-                if (username != null) {
+                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                    
+                    if (!jwtHelper.isTokenExpired(token)) {
+                        UsernamePasswordAuthenticationToken upat = 
+                                                new UsernamePasswordAuthenticationToken(token,null,userDetails.getAuthorities());
+                        
+                        upat.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                        SecurityContextHolder.getContext().setAuthentication(upat);
+                    }
                 }
             }
+            filterChain.doFilter(request,response);
     }
     
 }
