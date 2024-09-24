@@ -16,4 +16,8 @@ public class JwtAuthenticationHelper {
                     .parseClaimsJws(token)
                     .getBody();
     }
+
+    public String getUsernameFromToken(String token){
+        return getClaimsFromToken(token).getSubject();
+    }
 }
